@@ -52,7 +52,11 @@ env*
 # Temp/Build files
 tmp/*
 !tmp/.touch
+# Build output from the assets pipeline lands in static/public, but the
+# checked-in brand images and fonts must stay in the repo. Git will not
+# descend into an excluded directory, so the negations need trailing
+# slashes on the directories themselves, not globs on their contents.
 appname/static/public/*
-!appname/static/public/images/*
-!appname/static/public/ignite/*
-!appname/static/public/fonts/*
+!appname/static/public/images/
+!appname/static/public/ignite/
+!appname/static/public/fonts/
