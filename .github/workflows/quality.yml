@@ -1,0 +1,102 @@
+name: Quality Pipeline
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  static-analysis:
+    name: Lint and security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Ruff
+        run: |
+          mkdir -p artifacts/lint
+          ruff check --output-format=json --output-file=artifacts/lint/ruff.json . || true
+          ruff check --output-format=concise . | tee artifacts/lint/ruff.txt
+      - name: Bandit
+        run: |
+          mkdir -p artifacts/security
+          bandit -r mytemplate -f json -o artifacts/security/bandit.json --quiet || true
+          bandit -r mytemplate --quiet | tee artifacts/security/bandit.txt
+      - name: Upload static analysis reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-analysis-reports
+          path: artifacts/
+
+  backend-tests:
+    name: Backend tests and coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: pytest
+        env:
+          MYTEMPLATE_ENV: test
+        run: |
+          mkdir -p artifacts/tests artifacts/coverage
+          pytest tests -m "not ui" \
+            --junitxml=artifacts/tests/junit-backend.xml \
+            --cov=mytemplate \
+            --cov-report=term-missing \
+            --cov-report=xml:artifacts/coverage/coverage.xml \
+            --cov-report=html:artifacts/coverage/html \
+            --cov-fail-under=80
+      - name: Upload test and coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: artifacts/
+
+  ui-tests:
+    name: UI tests (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Playwright
+        env:
+          MYTEMPLATE_ENV: test
+        run: |
+          mkdir -p artifacts/tests
+          pytest tests/ui -m ui --junitxml=artifacts/tests/junit-ui.xml
+      - name: Upload UI test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-reports
+          path: artifacts/

@@ -61,3 +61,4 @@ mytemplate/static/public/*
 !mytemplate/static/public/mytemplate/
 !mytemplate/static/public/fonts/
 artifacts/
+test-reports/
