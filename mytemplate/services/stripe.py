@@ -1,5 +1,4 @@
 import time
-from urllib.parse import unquote
 
 from flask import url_for
 from mytemplate.models import db

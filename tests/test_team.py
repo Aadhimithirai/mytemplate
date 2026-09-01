@@ -2,7 +2,6 @@ import pytest
 
 from mytemplate.models import db
 from mytemplate.models.user import User
-from mytemplate.models.teams.team import Team
 
 create_user = False
 

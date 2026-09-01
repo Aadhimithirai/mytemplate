@@ -1,9 +1,7 @@
-from itertools import product
 import logging
-from flask import Blueprint, request, url_for, abort
+from flask import Blueprint, request
 
 from mytemplate.models import db, get_or_none
-from mytemplate.models.user import User
 from mytemplate.models.teams import Team
 from mytemplate.extensions import csrf, stripe
 from mytemplate.billing_plans import plans_by_price_id, MonthlyPremium

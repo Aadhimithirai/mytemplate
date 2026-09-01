@@ -6,7 +6,11 @@ class Token:
         self.app = app
         encoded_secret = app.config["SECRET_KEY"].encode()
         self.ts = URLSafeTimedSerializer(encoded_secret)
-        self.unique_salt = hashlib.md5(encoded_secret).hexdigest()[:5]
+        # Not a security hash: this derives a short, stable namespace suffix
+        # for itsdangerous salts from the app secret. usedforsecurity=False
+        # states that intent and keeps the build FIPS-safe.
+        self.unique_salt = hashlib.md5(
+            encoded_secret, usedforsecurity=False).hexdigest()[:5]
 
     def generate(self, key, salt='default-salt'):
         return self.ts.dumps(key, salt + self.unique_salt)

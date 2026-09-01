@@ -1,13 +1,11 @@
-from flask import Blueprint, render_template, flash, abort, redirect, request, url_for, session
+from flask import Blueprint, render_template, flash, abort, redirect, url_for
 from flask_login import login_required, current_user
 
 from mytemplate.extensions import storage
 from mytemplate.models import db, get_or_none
-from mytemplate.models.teams import Team, TeamMember
+from mytemplate.models.teams import Team
 from mytemplate.models.team_file import TeamFile
-from mytemplate.forms import SimpleForm
 from mytemplate.forms.files import FileForm
-from mytemplate.helpers.session import current_membership
 
 blueprint = Blueprint('dashboard_files', __name__)
 
@@ -44,7 +42,7 @@ def add_file(team_id):
         db.session.add(team_file)
         db.session.commit()
 
-        flash("Succesfully Uploaded {}".format(team_file.file_name, attachment.url), 'warning')
+        flash("Succesfully Uploaded {}".format(team_file.file_name, ), 'warning')
         return redirect(url_for('.index', team_id=team_id))
 
 @blueprint.route('/<hashid:team_id>/files/<hashid:file_id>')

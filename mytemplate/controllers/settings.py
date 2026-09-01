@@ -11,7 +11,7 @@ from mytemplate.helpers.gdpr import GDPRExport
 from mytemplate.utils.token import generate_api_secret
 from mytemplate.billing_plans import plans_by_name
 
-from mytemplate.extensions import stripe, branding
+from mytemplate.extensions import branding
 
 settings_blueprint = Blueprint('user_settings', __name__)
 

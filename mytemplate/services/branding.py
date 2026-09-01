@@ -1,4 +1,3 @@
-import os
 class Branding:
     def __init__(self):
         self.environment = "prod"

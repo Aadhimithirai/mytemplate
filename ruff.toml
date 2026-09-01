@@ -1,0 +1,15 @@
+# Ruff replaces flake8 here. The rule set is deliberately narrow: real
+# errors (E), pyflakes correctness checks (F), and warnings (W). Style
+# rewrites like import sorting and f-string modernisation are left off so
+# the linter reports defects rather than churn across an inherited codebase.
+
+line-length = 120
+target-version = "py312"
+exclude = ["env", "migrations", ".git", "__pycache__"]
+
+[lint]
+select = ["E", "F", "W"]
+
+[lint.per-file-ignores]
+# Test files favour readability over line length.
+"tests/*" = ["E501"]
