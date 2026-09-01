@@ -60,3 +60,4 @@ mytemplate/static/public/*
 !mytemplate/static/public/images/
 !mytemplate/static/public/mytemplate/
 !mytemplate/static/public/fonts/
+artifacts/
