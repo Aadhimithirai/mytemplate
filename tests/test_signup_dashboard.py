@@ -1,7 +1,7 @@
 import pytest
 
-from appname.extensions import hashids
-from appname.models.user import User
+from mytemplate.extensions import hashids
+from mytemplate.models.user import User
 
 create_user = True
 
@@ -44,7 +44,7 @@ class TestSignupAndDashboard:
 
         assert response.status_code == 200
         body = response.get_data(as_text=True)
-        assert "Welcome to appname." in body
+        assert "Welcome to mytemplate." in body
         assert "Dashboard" in body
 
         new_user = User.lookup("fresh-user@example.com")

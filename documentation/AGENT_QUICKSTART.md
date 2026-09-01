@@ -5,7 +5,7 @@ Use this when you want to get productive in this repo with minimal context.
 ## 1) Setup
 
 ```bash
-cd /Users/sumukh/code/Ignite
+cd /Users/sumukh/code/MyTemplate
 python3 -m venv env
 source env/bin/activate
 python -m pip install --upgrade pip
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ## 2) Initialize Local Data
 
 ```bash
-APPNAME_ENV=dev ./manage.py resetdb
+MYTEMPLATE_ENV=dev ./manage.py resetdb
 ```
 
 This seeds:
@@ -40,18 +40,18 @@ make agent-smoke
 make agent-test
 
 # Optional: full test discovery (also includes untracked local tests)
-APPNAME_ENV=test ./manage.py test --coverage
+MYTEMPLATE_ENV=test ./manage.py test --coverage
 ```
 
 ## 5) High-Signal File Locations
 
-- App factory and blueprint wiring: `appname/__init__.py`
-- Environment configs: `appname/settings.py`
-- Auth + signup/login: `appname/controllers/auth.py`
-- Dashboard routes: `appname/controllers/dashboard/`
-- API resources: `appname/api/`
-- Core models: `appname/models/`
-- Templates: `appname/templates/`
+- App factory and blueprint wiring: `mytemplate/__init__.py`
+- Environment configs: `mytemplate/settings.py`
+- Auth + signup/login: `mytemplate/controllers/auth.py`
+- Dashboard routes: `mytemplate/controllers/dashboard/`
+- API resources: `mytemplate/api/`
+- Core models: `mytemplate/models/`
+- Templates: `mytemplate/templates/`
 - Tests: `tests/`
 
 ## Troubleshooting
@@ -59,6 +59,6 @@ APPNAME_ENV=test ./manage.py test --coverage
 - `flask run` cannot find app:
   - Ensure `FLASK_APP=manage`
 - Tests fail with config mismatch:
-  - Ensure `APPNAME_ENV=test`
+  - Ensure `MYTEMPLATE_ENV=test`
 - OAuth/Stripe paths not working locally:
   - Load local env vars from `.env.local` (see `.env.local.sample`)

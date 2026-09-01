@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-import appname.helpers.session as session_helper
+import mytemplate.helpers.session as session_helper
 import pytest
 
 create_user = True

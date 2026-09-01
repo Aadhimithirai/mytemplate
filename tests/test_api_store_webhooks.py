@@ -2,12 +2,12 @@ from types import SimpleNamespace
 
 import pytest
 
-from appname.controllers import store as store_controller
-from appname.controllers.webhooks import stripe as webhook_controller
-from appname.models import db
-from appname.models.teams import Team
-from appname.models.user import User
-from appname.utils.token import generate_api_secret
+from mytemplate.controllers import store as store_controller
+from mytemplate.controllers.webhooks import stripe as webhook_controller
+from mytemplate.models import db
+from mytemplate.models.teams import Team
+from mytemplate.models.user import User
+from mytemplate.utils.token import generate_api_secret
 
 create_user = True
 

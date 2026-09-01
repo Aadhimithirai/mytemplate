@@ -33,4 +33,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          py.test --junitxml=test-reports/results.xml --cov-report term-missing --cov=appname tests/
+          py.test --junitxml=test-reports/results.xml --cov-report term-missing --cov=mytemplate tests/

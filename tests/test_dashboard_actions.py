@@ -2,13 +2,13 @@ import io
 
 import pytest
 
-import appname.controllers.dashboard.files as files_controller
-import appname.controllers.dashboard.team as team_controller
-from appname.extensions import hashids, storage
-from appname.models import db
-from appname.models.team_file import TeamFile
-from appname.models.teams import TeamMember
-from appname.models.user import User
+import mytemplate.controllers.dashboard.files as files_controller
+import mytemplate.controllers.dashboard.team as team_controller
+from mytemplate.extensions import hashids, storage
+from mytemplate.models import db
+from mytemplate.models.team_file import TeamFile
+from mytemplate.models.teams import TeamMember
+from mytemplate.models.user import User
 
 create_user = True
 

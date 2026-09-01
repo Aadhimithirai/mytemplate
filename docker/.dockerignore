@@ -43,4 +43,4 @@ env*
 .DS_Store
 *.sublime-*
 
-appname/static/public/*
+mytemplate/static/public/*

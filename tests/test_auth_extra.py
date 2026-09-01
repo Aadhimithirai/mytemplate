@@ -1,13 +1,13 @@
 import pytest
 from jinja2 import TemplateNotFound
 
-import appname.billing_plans as billing_plans_module
-import appname.constants as constants
-import appname.controllers.auth as auth_controller
-from appname.extensions import hashids, token
-from appname.models import db
-from appname.models.teams import TeamMember
-from appname.models.user import User
+import mytemplate.billing_plans as billing_plans_module
+import mytemplate.constants as constants
+import mytemplate.controllers.auth as auth_controller
+from mytemplate.extensions import hashids, token
+from mytemplate.models import db
+from mytemplate.models.teams import TeamMember
+from mytemplate.models.user import User
 
 create_user = True
 

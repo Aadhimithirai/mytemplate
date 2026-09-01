@@ -1,6 +1,6 @@
 [run]
 branch = True
-include = appname/*
+include = mytemplate/*
 omit =
     *static*
     *templates*

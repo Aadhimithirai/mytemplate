@@ -1,8 +1,8 @@
 import pytest
 
-from appname.models import db
-from appname.models.user import User
-from appname.models.teams.team import Team
+from mytemplate.models import db
+from mytemplate.models.user import User
+from mytemplate.models.teams.team import Team
 
 create_user = False
 

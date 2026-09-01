@@ -5,18 +5,18 @@ from types import SimpleNamespace
 import pytest
 import pytz
 
-import appname.billing_plans as billing_plans_module
-import appname.helpers.gdpr as gdpr_module
-import appname.services.stripe as stripe_service_module
-from appname.billing_plans import FreePlan, MeteredPlan, MonthlyPremium
-from appname.helpers.gdpr import GDPRExport
-from appname.mailers.notification import NotificationMailer
-from appname.models.user import User
-from appname.services.stripe import Stripe
-from appname.utils import math as math_utils
-from appname.utils import text as text_utils
-from appname.utils import time as time_utils
-from appname.utils import token as token_utils
+import mytemplate.billing_plans as billing_plans_module
+import mytemplate.helpers.gdpr as gdpr_module
+import mytemplate.services.stripe as stripe_service_module
+from mytemplate.billing_plans import FreePlan, MeteredPlan, MonthlyPremium
+from mytemplate.helpers.gdpr import GDPRExport
+from mytemplate.mailers.notification import NotificationMailer
+from mytemplate.models.user import User
+from mytemplate.services.stripe import Stripe
+from mytemplate.utils import math as math_utils
+from mytemplate.utils import text as text_utils
+from mytemplate.utils import time as time_utils
+from mytemplate.utils import token as token_utils
 
 create_user = True
 

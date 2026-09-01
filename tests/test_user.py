@@ -1,7 +1,7 @@
 import pytest
 
-from appname.models import db, get_or_none, transaction
-from appname.models.user import User
+from mytemplate.models import db, get_or_none, transaction
+from mytemplate.models.user import User
 
 create_user = True
 

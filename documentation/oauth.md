@@ -21,7 +21,7 @@ export GOOGLE_CONSUMER_SECRET='your-secret'
 
 #### Implementation:
 
-See `appname/controllers/google.py`.
+See `mytemplate/controllers/google.py`.
 
 
 ### Other Providers (Github, Slack, Twitter, etc)

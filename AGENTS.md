@@ -4,25 +4,25 @@ This file is a practical runbook for AI coding agents working in this repository
 
 ## What This Repo Is
 
-Ignite is a Flask starter app with:
+MyTemplate is a Flask starter app with:
 - Auth (email/password + Google OAuth)
 - Team/membership model
 - Billing hooks (Stripe)
 - Basic REST API
 - Admin/dashboard UI
 
-Primary package: `appname/`
+Primary package: `mytemplate/`
 
 ## Fast Start (Local Development)
 
 ```bash
-cd /Users/sumukh/code/Ignite
+cd /Users/sumukh/code/MyTemplate
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 
 # Seed local sqlite DB with starter users
-APPNAME_ENV=dev ./manage.py resetdb
+MYTEMPLATE_ENV=dev ./manage.py resetdb
 
 # Run app
 FLASK_APP=manage flask --debug run
@@ -44,36 +44,36 @@ make lint
 make agent-test
 
 # Full test discovery (also runs untracked local tests, if any)
-APPNAME_ENV=test ./manage.py test --coverage
+MYTEMPLATE_ENV=test ./manage.py test --coverage
 
 # Or raw pytest
-APPNAME_ENV=test pytest --cov-report=term-missing --cov=appname tests/
+MYTEMPLATE_ENV=test pytest --cov-report=term-missing --cov=mytemplate tests/
 
 # Quick DB reset + seed (dev only)
-APPNAME_ENV=dev ./manage.py resetdb
+MYTEMPLATE_ENV=dev ./manage.py resetdb
 ```
 
 ## Project Map
 
 - `manage.py`: CLI entrypoint (`server`, `resetdb`, `test`, etc.)
 - `wsgi.py`: production WSGI app object
-- `appname/__init__.py`: app factory, extension setup, blueprint registration
-- `appname/settings.py`: `DevConfig`, `TestConfig`, `ProdConfig`
-- `appname/controllers/`: web routes
-- `appname/controllers/dashboard/`: logged-in dashboard routes
-- `appname/controllers/oauth/google.py`: Google OAuth flow
-- `appname/controllers/webhooks/stripe.py`: Stripe webhook handler
-- `appname/api/`: API blueprints/resources (`/api/v1/...`)
-- `appname/models/`: SQLAlchemy models
-- `appname/templates/`: Jinja templates
+- `mytemplate/__init__.py`: app factory, extension setup, blueprint registration
+- `mytemplate/settings.py`: `DevConfig`, `TestConfig`, `ProdConfig`
+- `mytemplate/controllers/`: web routes
+- `mytemplate/controllers/dashboard/`: logged-in dashboard routes
+- `mytemplate/controllers/oauth/google.py`: Google OAuth flow
+- `mytemplate/controllers/webhooks/stripe.py`: Stripe webhook handler
+- `mytemplate/api/`: API blueprints/resources (`/api/v1/...`)
+- `mytemplate/models/`: SQLAlchemy models
+- `mytemplate/templates/`: Jinja templates
 - `tests/`: pytest suite
 - `documentation/`: deployment/integration notes
 
 ## Config + Environment
 
 Minimum local env:
-- `APPNAME_ENV=dev` for local app
-- `APPNAME_ENV=test` for tests
+- `MYTEMPLATE_ENV=dev` for local app
+- `MYTEMPLATE_ENV=test` for tests
 - `FLASK_APP=manage`
 - `FLASK_DEBUG=1` for local debug run (or use `flask --debug run`)
 
@@ -96,22 +96,22 @@ source .env.local
 3. After code changes:
    - Run targeted tests for touched area.
    - Run `make agent-test` before final handoff when feasible.
-4. If models/migrations behavior is touched, run a local DB reset (`APPNAME_ENV=dev ./manage.py resetdb`) and sanity-check login/dashboard flows.
+4. If models/migrations behavior is touched, run a local DB reset (`MYTEMPLATE_ENV=dev ./manage.py resetdb`) and sanity-check login/dashboard flows.
 5. Do not commit secrets or `.env.local`.
 
 ## Common Change Targets
 
-- Auth/login/signup: `appname/controllers/auth.py`, `appname/forms/login.py`, auth templates
-- Dashboard pages: `appname/controllers/dashboard/*.py` + `appname/templates/dashboard/*`
-- Team logic: `appname/models/teams/*` and `appname/controllers/dashboard/team.py`
-- API behavior: `appname/api/*.py`
-- Billing/webhooks: `appname/controllers/webhooks/stripe.py`, `appname/billing_plans.py`, `appname/services/stripe.py`
+- Auth/login/signup: `mytemplate/controllers/auth.py`, `mytemplate/forms/login.py`, auth templates
+- Dashboard pages: `mytemplate/controllers/dashboard/*.py` + `mytemplate/templates/dashboard/*`
+- Team logic: `mytemplate/models/teams/*` and `mytemplate/controllers/dashboard/team.py`
+- API behavior: `mytemplate/api/*.py`
+- Billing/webhooks: `mytemplate/controllers/webhooks/stripe.py`, `mytemplate/billing_plans.py`, `mytemplate/services/stripe.py`
 
 ## Known Gotchas
 
-- Tests rely on `APPNAME_ENV=test`; forgetting it can cause wrong config usage.
+- Tests rely on `MYTEMPLATE_ENV=test`; forgetting it can cause wrong config usage.
 - Test fixture data (`tests/conftest.py`) uses different seed passwords than dev `resetdb`.
-- `appname/api/` auth expects `api_key` in query string.
+- `mytemplate/api/` auth expects `api_key` in query string.
 - In dev/test, some async behavior is intentionally synchronous (`RQ_ASYNC=False` in settings).
 
 ## References

@@ -38,12 +38,12 @@ agent-setup:
 
 agent-resetdb:
 	@if [ ! -x "$(VENV_PYTHON)" ]; then echo "Run 'make agent-setup' first."; exit 1; fi
-	APPNAME_ENV=dev $(VENV_PYTHON) manage.py resetdb
+	MYTEMPLATE_ENV=dev $(VENV_PYTHON) manage.py resetdb
 
 agent-smoke:
 	@if [ ! -x "$(VENV_PYTHON)" ]; then echo "Run 'make agent-setup' first."; exit 1; fi
-	APPNAME_ENV=test $(VENV_PYTHON) -m pytest -q tests/test_urls.py tests/test_login.py
+	MYTEMPLATE_ENV=test $(VENV_PYTHON) -m pytest -q tests/test_urls.py tests/test_login.py
 
 agent-test:
 	@if [ ! -x "$(VENV_PYTHON)" ]; then echo "Run 'make agent-setup' first."; exit 1; fi
-	APPNAME_ENV=test $(VENV_PYTHON) -m pytest --cov-report=term-missing --cov=appname $(AGENT_TEST_FILES)
+	MYTEMPLATE_ENV=test $(VENV_PYTHON) -m pytest --cov-report=term-missing --cov=mytemplate $(AGENT_TEST_FILES)
