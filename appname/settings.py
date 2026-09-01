@@ -50,7 +50,7 @@ class ProdConfig(Config):
     # You need to set this for the DB
     # The replace call is required for newer versions of python
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', '').replace("postgres://", "postgresql://", 1)
-    CACHE_TYPE = 'redis'
+    CACHE_TYPE = 'RedisCache'
     CACHE_KEY_PREFIX = 'appname-'
 
     # You should be using HTTPS in production anyway, but if you are not, turn
@@ -65,7 +65,7 @@ class DevConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
 
-    CACHE_TYPE = 'simple'
+    CACHE_TYPE = 'SimpleCache'
     # Don't do anything fancy with the assets pipeline (faster + easier to debug)
     ASSETS_DEBUG = True
     # Run jobs instantly, without needing to spin up a worker
@@ -85,7 +85,7 @@ class TestConfig(Config):
     SQLALCHEMY_ECHO = False  # Optionally enable if you want to see database actions
     ASSETS_DEBUG = True
 
-    CACHE_TYPE = 'null'
+    CACHE_TYPE = 'NullCache'
     CACHE_NO_NULL_WARNING = True
     WTF_CSRF_ENABLED = False
     RQ_ASYNC = False
